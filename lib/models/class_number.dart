@@ -4,7 +4,7 @@ class ClassNumber extends Equatable {
   final int number;
   final String addition;
 
-  ClassNumber(this.number, [this.addition = '']);
+  const ClassNumber(this.number, [this.addition = '']);
 
   String get getAddition => addition;
 
