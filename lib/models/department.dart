@@ -2,63 +2,63 @@ import 'package:equatable/equatable.dart';
 
 class Department extends Equatable {
   /// Business Department
-  static const Department BUSINESS_DEPARTMENT = Department(
-    "Business",
+  static const BUSINESS_DEPARTMENT = const Department(
+    'Business',
   );
 
   /// English Department
-  static const Department ENGLISH_DEPARTMENT = Department(
-    "English",
+  static const ENGLISH_DEPARTMENT = const Department(
+    'English',
   );
 
   /// FCS Department
-  static const Department FCS_DEPARTMENT = Department(
-    "Family Consumer Science",
+  static const FCS_DEPARTMENT = const Department(
+    'Family Consumer Science',
   );
 
   /// Physical Education Department
-  static const Department PE_DEPARTMENT = Department(
-    "Health and Physical Education",
+  static const PE_DEPARTMENT = const Department(
+    'Health and Physical Education',
   );
 
   /// Math Department
-  static const Department MATH_DEPARTMENT = Department(
-    "Mathematics",
+  static const MATH_DEPARTMENT = const Department(
+    'Mathematics',
   );
 
   /// Performing Arts Department
-  static const Department PERFORMING_ARTS_DEPARTMENT = Department(
-    "Performing Arts",
+  static const PERFORMING_ARTS_DEPARTMENT = const Department(
+    'Performing Arts',
   );
 
   /// Science Department
-  static const Department SCIENCE_DEPARTMENT = Department(
-    "Science",
+  static const SCIENCE_DEPARTMENT = const Department(
+    'Science',
   );
 
   /// Social Studies and History Department
-  static const Department SOCIAL_STUDIES_DEPARTMENT = Department(
-    "Social Studies",
+  static const SOCIAL_STUDIES_DEPARTMENT = const Department(
+    'Social Studies',
   );
 
   /// Technology Department
-  static const Department TECHNOLOGY_DEPARTMENT = Department(
-    "Technology, Design, and Engineering",
+  static const TECHNOLOGY_DEPARTMENT = const Department(
+    'Technology, Design, and Engineering',
   );
 
   /// Visual Arts Department
-  static const Department VISUAL_ART_DEPARTMENT = Department(
-    "Visual Arts",
+  static const VISUAL_ART_DEPARTMENT = const Department(
+    'Visual Arts',
   );
 
   /// World Language Department
-  static const Department WORLD_LANGUAGE_DEPARTMENT = Department(
-    "World Language",
+  static const WORLD_LANGUAGE_DEPARTMENT = const Department(
+    'World Language',
   );
 
-  /// General "All" Departments
-  static const Department ALL_DEPARTMENTS = Department(
-    "All",
+  /// General 'All' Departments
+  static const ALL_DEPARTMENTS = const Department(
+    'All',
   );
 
   final String name;
