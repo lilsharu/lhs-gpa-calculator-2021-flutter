@@ -29,6 +29,12 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
 
+  # To accurately do decimal mathematics 
+  decimal: ^0.3.0
+
+  # To make equality among custom classes easy
+  equatable: ^1.2.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
