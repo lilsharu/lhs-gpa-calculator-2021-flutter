@@ -69,13 +69,13 @@ class Class {
 
   set setName(String name) => this.name = name;
 
-  void updateCoreStatus() {
-    isCore = department.isCore() && !isElective || level == ClassLevel.AP;
-  }
-
   @override
   String toString() {
     return this.name;
+  }
+
+  void updateCoreStatus() {
+    isCore = department.isCore() && !isElective || level == ClassLevel.AP;
   }
 }
 
