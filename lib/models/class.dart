@@ -5,77 +5,84 @@ import './class_number.dart';
 import './department.dart';
 
 class Class {
-  String name;
-  Decimal credits;
-  ClassLevel level;
-  Department department;
-  ClassLength length;
-  ClassNumber classNumber;
-  bool isCore;
-  bool isElective;
+  String _name;
+  Decimal _credits;
+  ClassLevel _level;
+  Department _department;
+  ClassLength _length;
+  ClassNumber _classNumber;
+  bool _isCore;
+  bool _isElective;
 
   Class({
-    @required this.name,
-    @required this.credits,
-    @required this.level,
-    @required this.department,
-    @required this.length,
-    @required this.classNumber,
-    this.isElective = false,
-  }) {
+    @required name,
+    @required credits,
+    @required level,
+    @required department,
+    @required length,
+    @required classNumber,
+    isElective,
+  })  : _name = name,
+        _credits = credits,
+        _level = level,
+        _department = department,
+        _length = length,
+        _classNumber = classNumber,
+        _isElective = isElective ?? false {
     updateCoreStatus();
   }
 
   Class.empty();
 
-  ClassNumber get getClassNumber => classNumber;
+  ClassNumber get getClassNumber => _classNumber;
 
-  Decimal get getCredits => credits;
+  Decimal get getCredits => _credits;
 
-  Department get getDepartment => department;
+  Department get getDepartment => _department;
 
-  bool get getIsCore => isCore;
+  bool get getIsCore => _isCore;
 
-  bool get getIsElective => isElective;
+  bool get getIsElective => _isElective;
 
-  ClassLength get getLength => length;
+  ClassLength get getLength => _length;
 
-  ClassLevel get getLevel => level;
+  ClassLevel get getLevel => _level;
 
-  String get getName => name;
+  String get getName => _name;
 
-  set setClassNumber(ClassNumber classNumber) => this.classNumber = classNumber;
+  set setClassNumber(ClassNumber classNumber) =>
+      this._classNumber = classNumber;
 
-  set setCredits(Decimal credits) => this.credits = credits;
+  set setCredits(Decimal credits) => this._credits = credits;
 
-  set setDepartment(Department department) => this.department = department;
+  set setDepartment(Department department) => this._department = department;
 
   set setIsCore(bool isCore) {
-    this.isCore = isCore;
+    this._isCore = isCore;
     updateCoreStatus();
   }
 
   set setIsElective(bool isElective) {
-    this.isElective = isElective;
+    this._isElective = isElective;
     updateCoreStatus();
   }
 
-  set setLength(ClassLength length) => this.length = length;
+  set setLength(ClassLength length) => this._length = length;
 
   set setLevel(ClassLevel level) {
-    this.level = level;
+    this._level = level;
     updateCoreStatus();
   }
 
-  set setName(String name) => this.name = name;
+  set setName(String name) => this._name = name;
 
   @override
   String toString() {
-    return this.name;
+    return this._name;
   }
 
   void updateCoreStatus() {
-    isCore = department.isCore() && !isElective || level == ClassLevel.AP;
+    _isCore = _department.isCore() && !_isElective || _level == ClassLevel.AP;
   }
 }
 
