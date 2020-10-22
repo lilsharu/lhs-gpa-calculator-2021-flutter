@@ -4,52 +4,49 @@ import 'package:flutter/foundation.dart';
 
 class Grade extends Equatable {
   // ignore: non_constant_identifier_names
-  static final Grade A = Grade('A');
+  static const Grade A = const Grade('A');
   // ignore: non_constant_identifier_names
-  static final Grade A_MINUS = Grade('A-');
+  static const Grade A_MINUS = const Grade('A-');
   // ignore: non_constant_identifier_names
-  static final Grade B_PLUS = Grade('B+');
+  static const Grade B_PLUS = const Grade('B+');
   // ignore: non_constant_identifier_names
-  static final Grade B = Grade('B');
+  static const Grade B = const Grade('B');
   // ignore: non_constant_identifier_names
-  static final Grade B_MINUS = Grade('B-');
+  static const Grade B_MINUS = const Grade('B-');
   // ignore: non_constant_identifier_names
-  static final Grade C_PLUS = Grade('C+');
+  static const Grade C_PLUS = const Grade('C+');
   // ignore: non_constant_identifier_names
-  static final Grade C = Grade('C');
+  static const Grade C = const Grade('C');
   // ignore: non_constant_identifier_names
-  static final Grade C_MINUS = Grade('C-');
+  static const Grade C_MINUS = const Grade('C-');
   // ignore: non_constant_identifier_names
-  static final Grade D_PLUS = Grade('D+');
+  static const Grade D_PLUS = const Grade('D+');
   // ignore: non_constant_identifier_names
-  static final Grade D = Grade('D');
+  static const Grade D = const Grade('D');
   // ignore: non_constant_identifier_names
-  static final Grade D_MINUS = Grade('D-');
+  static const Grade D_MINUS = const Grade('D-');
   // ignore: non_constant_identifier_names
-  static final Grade F = Grade('F');
+  static const Grade F = const Grade('F');
   // ignore: non_constant_identifier_names
-  static final Grade NONE = Grade('None');
+  static const Grade NONE = const Grade('None');
 
   static final dp = Decimal.tryParse;
 
-  final String grade;
-  final Decimal gpaValue;
+  final String _grade;
 
-  String get getGrade => grade;
+  const Grade(this._grade);
 
-  Decimal get getGPAValue => gpaValue;
+  String get getGrade => _grade;
 
-  Grade(this.grade) : gpaValue = _calculateGPAValue(grade);
-
-  Grade.fromGPA(Decimal gpaValue) : this(_getGradeFromGPA(gpaValue));
+  Decimal get getGPAValue => _calculateGPAValue(_grade);
 
   @override
-  List<Object> get props => [grade];
+  List<Object> get props => [_grade];
 
   /// This implements a toString Method to allow the printing of data
   @override
   String toString() {
-    return grade;
+    return _grade;
   }
 
   static Grade average({
@@ -71,6 +68,33 @@ class Grade extends Equatable {
                     secondSemester.getGPAValue * dp('0.45') +
                     finalsGrade.getGPAValue * dp('0.10'));
     return Grade.fromGPA(averageGPAValue);
+  }
+
+  static Grade fromGPA(Decimal gpaValue) {
+    if (gpaValue >= dp('3.825'))
+      return Grade.A;
+    else if (gpaValue >= dp('3.495'))
+      return Grade.A_MINUS;
+    else if (gpaValue >= dp('3.155'))
+      return Grade.B_PLUS;
+    else if (gpaValue >= dp('2.825'))
+      return Grade.B;
+    else if (gpaValue >= dp('2.495'))
+      return Grade.B_MINUS;
+    else if (gpaValue >= dp('2.155'))
+      return Grade.C_PLUS;
+    else if (gpaValue >= dp('1.825'))
+      return Grade.C;
+    else if (gpaValue >= dp('1.495'))
+      return Grade.C_MINUS;
+    else if (gpaValue >= dp('1.155'))
+      return Grade.D_PLUS;
+    else if (gpaValue >= dp('0.825'))
+      return Grade.D;
+    else if (gpaValue >= dp('0.495'))
+      return Grade.D_MINUS;
+    else
+      return Grade.F;
   }
 
   /// Using the grade String, this calculates the GPA Value associated
