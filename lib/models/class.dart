@@ -15,13 +15,13 @@ class Class {
   bool _isElective;
 
   Class({
-    @required name,
-    @required credits,
-    @required level,
-    @required department,
-    @required length,
-    @required classNumber,
-    isElective,
+    @required String name,
+    @required Decimal credits,
+    @required ClassLevel level,
+    @required Department department,
+    @required ClassLength length,
+    @required ClassNumber classNumber,
+    bool isElective,
   })  : _name = name,
         _credits = credits,
         _level = level,
