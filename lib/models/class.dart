@@ -4,6 +4,17 @@ import 'package:flutter/foundation.dart';
 
 import './department.dart';
 
+enum ClassLength {
+  halfYear,
+  fullYear,
+}
+
+enum ClassLevel {
+  CP,
+  Honors,
+  AP,
+}
+
 class Class {
   String _name;
   Decimal _credits;
@@ -84,17 +95,6 @@ class Class {
   void updateCoreStatus() {
     _isCore = _department.isCore && !_isElective || _level == ClassLevel.AP;
   }
-}
-
-enum ClassLength {
-  halfYear,
-  fullYear,
-}
-
-enum ClassLevel {
-  CP,
-  Honors,
-  AP,
 }
 
 class ClassNumber extends Equatable {
