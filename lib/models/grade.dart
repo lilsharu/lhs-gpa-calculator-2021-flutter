@@ -41,8 +41,7 @@ class Grade extends Equatable {
     Grade secondSemester,
     Grade finalsGrade,
   }) {
-    var val =
-        (secondSemester != null ? 1 : 0) + (finalsGrade != null ? 2 : 0);
+    var val = (secondSemester != null ? 1 : 0) + (finalsGrade != null ? 2 : 0);
     var averageGPAValue = (val == 0
         ? firstSemester.getGPAValue
         : val == 1
