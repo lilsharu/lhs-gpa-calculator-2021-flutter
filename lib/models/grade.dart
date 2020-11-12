@@ -3,31 +3,18 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
 class Grade extends Equatable {
-  // ignore: non_constant_identifier_names
   static const Grade A = const Grade('A');
-  // ignore: non_constant_identifier_names
   static const Grade A_MINUS = const Grade('A-');
-  // ignore: non_constant_identifier_names
   static const Grade B_PLUS = const Grade('B+');
-  // ignore: non_constant_identifier_names
   static const Grade B = const Grade('B');
-  // ignore: non_constant_identifier_names
   static const Grade B_MINUS = const Grade('B-');
-  // ignore: non_constant_identifier_names
   static const Grade C_PLUS = const Grade('C+');
-  // ignore: non_constant_identifier_names
   static const Grade C = const Grade('C');
-  // ignore: non_constant_identifier_names
   static const Grade C_MINUS = const Grade('C-');
-  // ignore: non_constant_identifier_names
   static const Grade D_PLUS = const Grade('D+');
-  // ignore: non_constant_identifier_names
   static const Grade D = const Grade('D');
-  // ignore: non_constant_identifier_names
   static const Grade D_MINUS = const Grade('D-');
-  // ignore: non_constant_identifier_names
   static const Grade F = const Grade('F');
-  // ignore: non_constant_identifier_names
   static const Grade NONE = const Grade('None');
 
   static final dp = Decimal.tryParse;
@@ -55,7 +42,7 @@ class Grade extends Equatable {
     Grade finalsGrade,
   }) {
     var val =
-        (secondSemester != null ? 1 : 0) + (secondSemester != null ? 2 : 0);
+        (secondSemester != null ? 1 : 0) + (finalsGrade != null ? 2 : 0);
     var averageGPAValue = (val == 0
         ? firstSemester.getGPAValue
         : val == 1
