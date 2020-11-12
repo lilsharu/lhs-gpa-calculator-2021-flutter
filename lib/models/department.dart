@@ -73,7 +73,7 @@ class Department extends Equatable {
   ///
   /// Departments which are considered Core include Math, Science, Social Studies,
   /// English, and World Language.
-  bool isCore() {
+  bool get isCore {
     return this == ENGLISH_DEPARTMENT ||
         this == MATH_DEPARTMENT ||
         this == SCIENCE_DEPARTMENT ||

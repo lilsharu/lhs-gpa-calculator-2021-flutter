@@ -82,7 +82,7 @@ class Class {
   }
 
   void updateCoreStatus() {
-    _isCore = _department.isCore() && !_isElective || _level == ClassLevel.AP;
+    _isCore = _department.isCore && !_isElective || _level == ClassLevel.AP;
   }
 }
 
