@@ -61,6 +61,30 @@ class Department extends Equatable {
     'All',
   );
 
+  /// List of All Deparments
+  static const DEPARTMENT_LIST = const [
+    BUSINESS_DEPARTMENT,
+    ENGLISH_DEPARTMENT,
+    FCS_DEPARTMENT,
+    PE_DEPARTMENT,
+    MATH_DEPARTMENT,
+    PERFORMING_ARTS_DEPARTMENT,
+    SCIENCE_DEPARTMENT,
+    SOCIAL_STUDIES_DEPARTMENT,
+    TECHNOLOGY_DEPARTMENT,
+    VISUAL_ART_DEPARTMENT,
+    WORLD_LANGUAGE_DEPARTMENT,
+  ];
+
+  /// List of All Core Deparments
+  static const CORE_DEPARTMENT_LIST = const [
+    MATH_DEPARTMENT,
+    SCIENCE_DEPARTMENT,
+    ENGLISH_DEPARTMENT,
+    SOCIAL_STUDIES_DEPARTMENT,
+    WORLD_LANGUAGE_DEPARTMENT,
+  ];
+
   final String name;
 
   const Department(this.name);
@@ -79,5 +103,31 @@ class Department extends Equatable {
         this == SCIENCE_DEPARTMENT ||
         this == SOCIAL_STUDIES_DEPARTMENT ||
         this == WORLD_LANGUAGE_DEPARTMENT;
+  }
+
+  static List<Department> get getDepartments {
+    return [
+      BUSINESS_DEPARTMENT,
+      ENGLISH_DEPARTMENT,
+      FCS_DEPARTMENT,
+      PE_DEPARTMENT,
+      MATH_DEPARTMENT,
+      PERFORMING_ARTS_DEPARTMENT,
+      SCIENCE_DEPARTMENT,
+      SOCIAL_STUDIES_DEPARTMENT,
+      TECHNOLOGY_DEPARTMENT,
+      VISUAL_ART_DEPARTMENT,
+      WORLD_LANGUAGE_DEPARTMENT,
+    ];
+  }
+
+  static List<Department> get getCoreDepartments {
+    return [
+      MATH_DEPARTMENT,
+      SCIENCE_DEPARTMENT,
+      ENGLISH_DEPARTMENT,
+      SOCIAL_STUDIES_DEPARTMENT,
+      WORLD_LANGUAGE_DEPARTMENT,
+    ];
   }
 }
