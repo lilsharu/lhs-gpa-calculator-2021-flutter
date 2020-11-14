@@ -39,9 +39,9 @@ class Grade extends Equatable {
   static Grade average({
     @required Grade firstSemester,
     Grade secondSemester,
-    Grade finalsGrade,
+    Grade finals,
   }) {
-    var val = (secondSemester != null ? 1 : 0) + (finalsGrade != null ? 2 : 0);
+    var val = (secondSemester != null ? 1 : 0) + (finals != null ? 2 : 0);
     var averageGPAValue = (val == 0
         ? firstSemester.getGPAValue
         : val == 1
@@ -49,10 +49,10 @@ class Grade extends Equatable {
                 Decimal.fromInt(2)
             : val == 2
                 ? firstSemester.getGPAValue * dp('0.90') +
-                    finalsGrade.getGPAValue * dp('0.10')
+                    finals.getGPAValue * dp('0.10')
                 : firstSemester.getGPAValue * dp('0.45') +
                     secondSemester.getGPAValue * dp('0.45') +
-                    finalsGrade.getGPAValue * dp('0.10'));
+                    finals.getGPAValue * dp('0.10'));
     return Grade.fromGPA(averageGPAValue);
   }
 
