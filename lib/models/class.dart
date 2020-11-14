@@ -89,7 +89,7 @@ class Class {
 
   @override
   String toString() {
-    return this._name;
+    return "$_name ($_classNumber)";
   }
 
   void updateCoreStatus() {
