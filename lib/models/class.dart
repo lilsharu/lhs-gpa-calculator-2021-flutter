@@ -1,8 +1,10 @@
 import 'package:decimal/decimal.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:gpa_calculator/models/gpa.dart';
 
 import './department.dart';
+import './grade.dart';
 
 enum ClassLength {
   halfYear,
@@ -43,6 +45,17 @@ class Class {
     updateCoreStatus();
   }
 
+  Class.withClass(Class theClass)
+      : this(
+          name: theClass.getName,
+          credits: theClass.getCredits,
+          level: theClass.getLevel,
+          department: theClass.getDepartment,
+          length: theClass.getLength,
+          classNumber: theClass.getClassNumber,
+          isElective: theClass.getIsElective,
+        );
+
   Class.empty();
 
   ClassNumber get getClassNumber => _classNumber;
@@ -60,6 +73,8 @@ class Class {
   ClassLevel get getLevel => _level;
 
   String get getName => _name;
+
+  Class get getClass => this;
 
   set setClassNumber(ClassNumber classNumber) =>
       this._classNumber = classNumber;
@@ -95,6 +110,65 @@ class Class {
   void updateCoreStatus() {
     _isCore = _department.isCore && !_isElective || _level == ClassLevel.AP;
   }
+}
+
+class StudentClass extends Class {
+  Grade _firstSemester, _secondSemester, _finals;
+
+  StudentClass({
+    @required String name,
+    @required Decimal credits,
+    @required ClassLevel level,
+    @required Department department,
+    @required ClassLength length,
+    @required ClassNumber classNumber,
+    bool isElective,
+    @required Grade firstSemester,
+    Grade secondSemester,
+    Grade finals,
+  })  : this._firstSemester = firstSemester,
+        this._secondSemester = secondSemester,
+        this._finals = finals,
+        super(
+          name: name,
+          credits: credits,
+          level: level,
+          department: department,
+          length: length,
+          classNumber: classNumber,
+        );
+
+  StudentClass.withClass({
+    @required Class theClass,
+    @required Grade firstSemester,
+    Grade secondSemester,
+    Grade finals,
+  })  : this._firstSemester = firstSemester,
+        this._secondSemester = secondSemester,
+        this._finals = finals,
+        super.withClass(theClass);
+
+  Grade get getFirstSemester => _firstSemester;
+
+  Grade get getSecondSemester => _secondSemester;
+
+  Grade get getFinals => _finals;
+
+  Grade get getGrade => Grade.average(
+      firstSemester: _firstSemester,
+      secondSemester: _secondSemester,
+      finals: _finals);
+
+  GPA get getGPA => GPA(grade: this.getGrade, level: super._level);
+
+  GPA get getMaxGPA => GPA(grade: Grade.A, level: super._level);
+
+  set setFirstSemester(Grade firstSemester) => _firstSemester = firstSemester;
+
+  set setSecondSemester(Grade secondSemester) =>
+      _secondSemester = secondSemester;
+
+  set setFinals(Grade finals) => _finals = finals;
 }
 
 class ClassNumber extends Equatable {
