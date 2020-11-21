@@ -178,6 +178,18 @@ class StudentClassList {
 
   StudentClassList(this._studentClassList);
 
+  StudentClassList.empty() : _studentClassList = <StudentClass>[];
+
+  StudentClassList.from(StudentClassList classList)
+      : _studentClassList = <StudentClass>[] {
+    merge(classList);
+  }
+
+  StudentClassList.fromAll(List<StudentClassList> classLists)
+      : _studentClassList = <StudentClass>[] {
+    mergeAll(classLists);
+  }
+
   List<StudentClass> get getClasses => _studentClassList;
 
   Decimal get getAllCourseGPA {
@@ -281,8 +293,14 @@ class StudentClassList {
     _studentClassList.addAll(classes);
   }
 
-  void addCourses(List<StudentClass> moreCourses) =>
-      _studentClassList.addAll(moreCourses);
+  void addClasses(List<StudentClass> moreClasses) =>
+      _studentClassList.addAll(moreClasses);
+
+  void merge(StudentClassList classList) => addClasses(classList.getClasses);
+
+  void mergeAll(List<StudentClassList> classLists) {
+    for (var classList in classLists) merge(classList);
+  }
 }
 
 class ClassNumber extends Equatable {
