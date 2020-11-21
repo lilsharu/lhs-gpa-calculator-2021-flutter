@@ -19,7 +19,7 @@ enum ClassLevel {
 
 class Class {
   String _name;
-  Decimal _credits;
+  int _credits;
   ClassLevel _level;
   Department _department;
   ClassLength _length;
@@ -29,7 +29,7 @@ class Class {
 
   Class({
     @required String name,
-    @required Decimal credits,
+    @required int credits,
     @required ClassLevel level,
     @required Department department,
     @required ClassLength length,
@@ -60,7 +60,7 @@ class Class {
 
   ClassNumber get getClassNumber => _classNumber;
 
-  Decimal get getCredits => _credits;
+  int get getCredits => _credits;
 
   Department get getDepartment => _department;
 
@@ -79,12 +79,10 @@ class Class {
   set setClassNumber(ClassNumber classNumber) =>
       this._classNumber = classNumber;
 
-  set setCredits(Decimal credits) => this._credits = credits;
+  set setCredits(int credits) => this._credits = credits;
 
-  set setDepartment(Department department) => this._department = department;
-
-  set setIsCore(bool isCore) {
-    this._isCore = isCore;
+  set setDepartment(Department department) {
+    this._department = department;
     updateCoreStatus();
   }
 
@@ -117,7 +115,7 @@ class StudentClass extends Class {
 
   StudentClass({
     @required String name,
-    @required Decimal credits,
+    @required int credits,
     @required ClassLevel level,
     @required Department department,
     @required ClassLength length,
@@ -163,12 +161,128 @@ class StudentClass extends Class {
 
   GPA get getMaxGPA => GPA(grade: Grade.A, level: super._level);
 
+  get getUnweightedGPA => GPA(grade: this.getGrade);
+
   set setFirstSemester(Grade firstSemester) => _firstSemester = firstSemester;
 
   set setSecondSemester(Grade secondSemester) =>
       _secondSemester = secondSemester;
 
   set setFinals(Grade finals) => _finals = finals;
+}
+
+class StudentClassList {
+  static final dp = Decimal.tryParse;
+
+  final List<StudentClass> _studentClassList;
+
+  StudentClassList(this._studentClassList);
+
+  List<StudentClass> get getClasses => _studentClassList;
+
+  Decimal get getAllCourseGPA {
+    int credits = 0;
+    Decimal gpaSum = Decimal.zero;
+
+    for (var theClass in _studentClassList) {
+      credits += theClass.getCredits;
+      gpaSum +=
+          theClass.getGPA.calculate() * Decimal.fromInt(theClass.getCredits);
+    }
+
+    return gpaSum / Decimal.fromInt(credits);
+  }
+
+  Decimal get getMaxAllCourseGPA {
+    int credits = 0;
+    Decimal gpaSum = Decimal.zero;
+
+    for (var theClass in _studentClassList) {
+      credits += theClass.getCredits;
+      gpaSum +=
+          theClass.getGPA.calculate() * Decimal.fromInt(theClass.getCredits);
+    }
+
+    return gpaSum / Decimal.fromInt(credits);
+  }
+
+  Decimal get getCoreGPA {
+    int credits = 0;
+    Decimal gpaSum = Decimal.zero;
+
+    var coreDepartments = Department.getCoreDepartments;
+    var classNums = [0, 0, 0, 0, 0];
+
+    var studentClassList = [..._studentClassList];
+    studentClassList
+        .sort((a, b) => a.getGPA.calculate().compareTo(b.getGPA.calculate()));
+
+    for (var theClass in studentClassList) {
+      if (theClass.getIsCore) {
+        // Since only the best grade in a department is counted
+        int index = coreDepartments.indexOf(theClass.getDepartment);
+        if (classNums[index] == 0 || theClass.getLevel == ClassLevel.AP) {
+          credits += theClass.getCredits;
+          gpaSum += theClass.getGPA.calculate() *
+              Decimal.fromInt(theClass.getCredits);
+          classNums[index]++;
+        }
+      }
+    }
+
+    return gpaSum / Decimal.fromInt(credits);
+  }
+
+  Decimal get getMaxCoreGPA {
+    int credits = 0;
+    Decimal gpaSum = Decimal.zero;
+
+    var coreDepartments = Department.getCoreDepartments;
+    var classNums = [0, 0, 0, 0, 0];
+
+    var studentClassList = [..._studentClassList];
+    studentClassList
+        .sort((a, b) => a.getGPA.calculate().compareTo(b.getGPA.calculate()));
+
+    for (var theClass in studentClassList) {
+      if (theClass.getIsCore) {
+        int index = coreDepartments.indexOf(theClass.getDepartment);
+        if (classNums[index] == 0 || theClass.getLevel == ClassLevel.AP) {
+          credits += theClass.getCredits;
+          gpaSum += theClass.getMaxGPA.calculate() *
+              Decimal.fromInt(theClass.getCredits);
+          classNums[index]++;
+        }
+      }
+    }
+
+    return gpaSum / Decimal.fromInt(credits);
+  }
+
+  Decimal get getUnweightedGPA {
+    int credits = 0;
+    Decimal gpaSum = Decimal.zero;
+
+    for (var theClass in _studentClassList) {
+      credits += theClass.getCredits;
+      gpaSum += theClass.getUnweightedGPA.calculate() *
+          Decimal.fromInt(theClass.getCredits);
+    }
+
+    return gpaSum / Decimal.fromInt(credits);
+  }
+
+  Decimal get getMaxUnweightedGPA {
+    return Decimal.fromInt(4);
+  }
+
+  set setClasses(List<StudentClass> classes) {
+    _studentClassList.clear();
+    _studentClassList.addAll(classes);
+  }
+
+  void addCourses(List<StudentClass> moreCourses) =>
+      _studentClassList.addAll(moreCourses);
 }
 
 class ClassNumber extends Equatable {
