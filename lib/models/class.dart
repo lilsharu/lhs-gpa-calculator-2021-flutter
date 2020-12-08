@@ -1,6 +1,5 @@
 import 'package:decimal/decimal.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:gpa_calculator/models/gpa.dart';
 
 import './department.dart';
@@ -24,17 +23,17 @@ class Class {
   Department _department;
   ClassLength _length;
   ClassNumber _classNumber;
-  bool _isCore;
-  bool _isElective;
+  bool _isCore = false;
+  bool _isElective = false;
 
   Class({
-    @required String name,
-    @required int credits,
-    @required ClassLevel level,
-    @required Department department,
-    @required ClassLength length,
-    @required ClassNumber classNumber,
-    bool isElective,
+    required String name,
+    required int credits,
+    required ClassLevel level,
+    required Department department,
+    required ClassLength length,
+    required ClassNumber classNumber,
+    bool? isElective,
   })  : _name = name,
         _credits = credits,
         _level = level,
@@ -56,7 +55,13 @@ class Class {
           isElective: theClass.getIsElective,
         );
 
-  Class.empty();
+  Class.empty()
+      : _name = "",
+        _credits = 0,
+        _level = ClassLevel.CP,
+        _department = Department.ALL_DEPARTMENTS,
+        _length = ClassLength.fullYear,
+        _classNumber = ClassNumber(0);
 
   ClassNumber get getClassNumber => _classNumber;
 
@@ -111,19 +116,21 @@ class Class {
 }
 
 class StudentClass extends Class {
-  Grade _firstSemester, _secondSemester, _finals;
+  Grade _firstSemester;
+  Grade? _secondSemester;
+  Grade? _finals;
 
   StudentClass({
-    @required String name,
-    @required int credits,
-    @required ClassLevel level,
-    @required Department department,
-    @required ClassLength length,
-    @required ClassNumber classNumber,
-    bool isElective,
-    @required Grade firstSemester,
-    Grade secondSemester,
-    Grade finals,
+    required String name,
+    required int credits,
+    required ClassLevel level,
+    required Department department,
+    required ClassLength length,
+    required ClassNumber classNumber,
+    bool? isElective,
+    required Grade firstSemester,
+    Grade? secondSemester,
+    Grade? finals,
   })  : this._firstSemester = firstSemester,
         this._secondSemester = secondSemester,
         this._finals = finals,
@@ -137,10 +144,10 @@ class StudentClass extends Class {
         );
 
   StudentClass.withClass({
-    @required Class theClass,
-    @required Grade firstSemester,
-    Grade secondSemester,
-    Grade finals,
+    required Class theClass,
+    required Grade firstSemester,
+    Grade? secondSemester,
+    Grade? finals,
   })  : this._firstSemester = firstSemester,
         this._secondSemester = secondSemester,
         this._finals = finals,
@@ -148,9 +155,9 @@ class StudentClass extends Class {
 
   Grade get getFirstSemester => _firstSemester;
 
-  Grade get getSecondSemester => _secondSemester;
+  Grade? get getSecondSemester => _secondSemester;
 
-  Grade get getFinals => _finals;
+  Grade? get getFinals => _finals;
 
   Grade get getGrade => Grade.average(
       firstSemester: _firstSemester,
@@ -194,7 +201,17 @@ class StudentClassList {
 
   Decimal get getAllCourseGPA {
     final allCourseGPAValues = getAllCourseGPAValues;
-    return allCourseGPAValues['gpa'] / allCourseGPAValues['credits'];
+
+    Decimal? gpa = allCourseGPAValues['gpa'];
+    Decimal? credits = allCourseGPAValues['credits'];
+
+    if (gpa == null || credits == null) {
+      throw ArgumentError(
+        'The GPA Value Map is Missing Necessary Information',
+      );
+    }
+
+    return gpa / credits;
   }
 
   Map<String, Decimal> get getAllCourseGPAValues {
@@ -215,7 +232,17 @@ class StudentClassList {
 
   Decimal get getMaxAllCourseGPA {
     final maxAllCourseGPAValues = getMaxAllCourseGPAValues;
-    return maxAllCourseGPAValues['gpa'] / maxAllCourseGPAValues['credits'];
+
+    Decimal? gpa = maxAllCourseGPAValues['gpa'];
+    Decimal? credits = maxAllCourseGPAValues['credits'];
+
+    if (gpa == null || credits == null) {
+      throw ArgumentError(
+        'The GPA Value Map is Missing Necessary Information',
+      );
+    }
+
+    return gpa / credits;
   }
 
   Map<String, Decimal> get getMaxAllCourseGPAValues {
@@ -236,7 +263,17 @@ class StudentClassList {
 
   Decimal get getCoreGPA {
     final coreGPAValues = getCoreGPAValues;
-    return coreGPAValues['gpa'] / coreGPAValues['credits'];
+
+    Decimal? gpa = coreGPAValues['gpa'];
+    Decimal? credits = coreGPAValues['credits'];
+
+    if (gpa == null || credits == null) {
+      throw ArgumentError(
+        'The GPA Value Map is Missing Necessary Information',
+      );
+    }
+
+    return gpa / credits;
   }
 
   Map<String, Decimal> get getCoreGPAValues {
@@ -271,7 +308,17 @@ class StudentClassList {
 
   Decimal get getMaxCoreGPA {
     final maxCoreGPAValues = getMaxCoreGPAValues;
-    return maxCoreGPAValues['gpa'] / maxCoreGPAValues['credits'];
+
+    Decimal? gpa = maxCoreGPAValues['gpa'];
+    Decimal? credits = maxCoreGPAValues['credits'];
+
+    if (gpa == null || credits == null) {
+      throw ArgumentError(
+        'The GPA Value Map is Missing Necessary Information',
+      );
+    }
+
+    return gpa / credits;
   }
 
   Map<String, Decimal> get getMaxCoreGPAValues {
@@ -305,7 +352,17 @@ class StudentClassList {
 
   Decimal get getUnweightedGPA {
     final unweightedGPAValues = getUnweightedGPAValues;
-    return unweightedGPAValues['gpa'] / unweightedGPAValues['credits'];
+
+    Decimal? gpa = unweightedGPAValues['gpa'];
+    Decimal? credits = unweightedGPAValues['credits'];
+
+    if (gpa == null || credits == null) {
+      throw ArgumentError(
+        'The GPA Value Map is Missing Necessary Information',
+      );
+    }
+
+    return gpa / credits;
   }
 
   Map<String, Decimal> get getUnweightedGPAValues {

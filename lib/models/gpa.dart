@@ -6,10 +6,10 @@ import './grade.dart';
 class GPA {
   static final dp = Decimal.tryParse;
 
-  Grade _grade;
-  ClassLevel _level;
+  final Grade _grade;
+  final ClassLevel _level;
 
-  GPA({Grade grade = Grade.F, ClassLevel level = ClassLevel.CP})
+  const GPA({Grade grade = Grade.F, ClassLevel level = ClassLevel.CP})
       : this._grade = grade,
         this._level = level;
 
@@ -23,10 +23,10 @@ class GPA {
     } else {
       return _grade.getGPAValue +
           (_level == ClassLevel.CP
-              ? dp('0')
+              ? Decimal.zero
               : _level == ClassLevel.Honors
-                  ? dp('0.5')
-                  : dp('1'));
+                  ? dp('0.5')!
+                  : Decimal.one);
     }
   }
 
