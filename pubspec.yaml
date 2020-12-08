@@ -30,10 +30,10 @@ dependencies:
   cupertino_icons: ^1.0.0
 
   # To accurately do decimal mathematics 
-  decimal: ^0.3.0
+  decimal: ^1.0.0-nullsafety
 
   # To make equality among custom classes easy
-  equatable: ^1.2.3
+  equatable: ^2.0.0-nullsafety.0
 
 dev_dependencies:
   flutter_test:
