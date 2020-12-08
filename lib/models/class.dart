@@ -193,6 +193,11 @@ class StudentClassList {
   List<StudentClass> get getClasses => _studentClassList;
 
   Decimal get getAllCourseGPA {
+    final allCourseGPAValues = getAllCourseGPAValues;
+    return allCourseGPAValues['gpa'] / allCourseGPAValues['credits'];
+  }
+
+  Map<String, Decimal> get getAllCourseGPAValues {
     int credits = 0;
     Decimal gpaSum = Decimal.zero;
 
@@ -202,10 +207,18 @@ class StudentClassList {
           theClass.getGPA.calculate() * Decimal.fromInt(theClass.getCredits);
     }
 
-    return gpaSum / Decimal.fromInt(credits);
+    return {
+      'gpa': gpaSum,
+      'credits': Decimal.fromInt(credits),
+    };
   }
 
   Decimal get getMaxAllCourseGPA {
+    final maxAllCourseGPAValues = getMaxAllCourseGPAValues;
+    return maxAllCourseGPAValues['gpa'] / maxAllCourseGPAValues['credits'];
+  }
+
+  Map<String, Decimal> get getMaxAllCourseGPAValues {
     int credits = 0;
     Decimal gpaSum = Decimal.zero;
 
@@ -215,10 +228,18 @@ class StudentClassList {
           theClass.getGPA.calculate() * Decimal.fromInt(theClass.getCredits);
     }
 
-    return gpaSum / Decimal.fromInt(credits);
+    return {
+      'gpa': gpaSum,
+      'credits': Decimal.fromInt(credits),
+    };
   }
 
   Decimal get getCoreGPA {
+    final coreGPAValues = getCoreGPAValues;
+    return coreGPAValues['gpa'] / coreGPAValues['credits'];
+  }
+
+  Map<String, Decimal> get getCoreGPAValues {
     int credits = 0;
     Decimal gpaSum = Decimal.zero;
 
@@ -242,10 +263,18 @@ class StudentClassList {
       }
     }
 
-    return gpaSum / Decimal.fromInt(credits);
+    return {
+      'gpa': gpaSum,
+      'credits': Decimal.fromInt(credits),
+    };
   }
 
   Decimal get getMaxCoreGPA {
+    final maxCoreGPAValues = getMaxCoreGPAValues;
+    return maxCoreGPAValues['gpa'] / maxCoreGPAValues['credits'];
+  }
+
+  Map<String, Decimal> get getMaxCoreGPAValues {
     int credits = 0;
     Decimal gpaSum = Decimal.zero;
 
@@ -268,10 +297,18 @@ class StudentClassList {
       }
     }
 
-    return gpaSum / Decimal.fromInt(credits);
+    return {
+      'gpa': gpaSum,
+      'credits': Decimal.fromInt(credits),
+    };
   }
 
   Decimal get getUnweightedGPA {
+    final unweightedGPAValues = getUnweightedGPAValues;
+    return unweightedGPAValues['gpa'] / unweightedGPAValues['credits'];
+  }
+
+  Map<String, Decimal> get getUnweightedGPAValues {
     int credits = 0;
     Decimal gpaSum = Decimal.zero;
 
@@ -281,7 +318,10 @@ class StudentClassList {
           Decimal.fromInt(theClass.getCredits);
     }
 
-    return gpaSum / Decimal.fromInt(credits);
+    return {
+      'gpa': gpaSum,
+      'credits': Decimal.fromInt(credits),
+    };
   }
 
   Decimal get getMaxUnweightedGPA {
