@@ -35,9 +35,16 @@ dependencies:
   # To make equality among custom classes easy
   equatable: ^2.0.0-nullsafety.0
 
+  # Database Data Storage
+  sqflite:
+
+  # Data Location Understanding
+  path:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  test: ^1.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
