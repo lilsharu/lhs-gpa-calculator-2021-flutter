@@ -170,6 +170,19 @@ class StudentClass extends Class {
 
   get getUnweightedGPA => GPA(grade: this.getGrade);
 
+  Map<String, Decimal> get getFirstSemesterGPAValues {
+    var gpaSum =
+        GPA(grade: this._firstSemester, level: super._level).calculate() *
+            Decimal.fromInt(_credits) /
+            Decimal.fromInt(2);
+    var credits = Decimal.fromInt(_credits) / Decimal.fromInt(2);
+
+    return {
+      'gpa': gpaSum,
+      'credits': credits,
+    };
+  }
+
   set setFirstSemester(Grade firstSemester) => _firstSemester = firstSemester;
 
   set setSecondSemester(Grade secondSemester) =>
@@ -198,6 +211,8 @@ class StudentClassList {
   }
 
   List<StudentClass> get getClasses => _studentClassList;
+
+  Iterator<StudentClass> get iterator => _studentClassList.iterator;
 
   Decimal get getAllCourseGPA {
     final allCourseGPAValues = getAllCourseGPAValues;
