@@ -1,7 +1,7 @@
 import 'package:decimal/decimal.dart';
 
-import './class.dart';
-import './grade.dart';
+import '../class_data/class.dart';
+import 'grade.dart';
 
 class GPA {
   static final dp = Decimal.tryParse;
