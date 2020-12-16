@@ -56,7 +56,7 @@ class Class {
         );
 
   Class.empty()
-      : _name = "",
+      : _name = '',
         _credits = 0,
         _level = ClassLevel.CP,
         _department = Department.ALL_DEPARTMENTS,
@@ -107,7 +107,7 @@ class Class {
 
   @override
   String toString() {
-    return "$_name ($_classNumber)";
+    return '$_name ($_classNumber)';
   }
 
   void updateCoreStatus() {
@@ -168,7 +168,21 @@ class StudentClass extends Class {
 
   GPA get getMaxGPA => GPA(grade: Grade.A, level: super._level);
 
-  get getUnweightedGPA => GPA(grade: this.getGrade);
+  GPA get getUnweightedGPA => GPA(grade: this.getGrade);
+
+  Decimal get getFirstSemesterGPA {
+    var firstSemesterGPAValues = getFirstSemesterGPAValues;
+
+    Decimal? gpa = firstSemesterGPAValues['gpa'];
+    Decimal? credits = firstSemesterGPAValues['credits'];
+
+    if (gpa == null || credits == null)
+      throw ArgumentError(
+        'The GPA Value Map is Missing Necessary Information',
+      );
+
+    return gpa / credits;
+  }
 
   Map<String, Decimal> get getFirstSemesterGPAValues {
     var gpaSum =
