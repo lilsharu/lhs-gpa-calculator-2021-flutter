@@ -111,33 +111,4 @@ class Grade extends Equatable {
         return dp('0.00')!;
     }
   }
-
-  /// Uses GPA Value from Average of Grades to find out which Grade was truly
-  /// achieved.
-  static String _getGradeFromGPA(Decimal gpaValue) {
-    if (gpaValue >= dp('3.825')!)
-      return 'A';
-    else if (gpaValue >= dp('3.495')!)
-      return 'A-';
-    else if (gpaValue >= dp('3.155')!)
-      return 'B+';
-    else if (gpaValue >= dp('2.825')!)
-      return 'B';
-    else if (gpaValue >= dp('2.495')!)
-      return 'B-';
-    else if (gpaValue >= dp('2.155')!)
-      return 'C+';
-    else if (gpaValue >= dp('1.825')!)
-      return 'C';
-    else if (gpaValue >= dp('1.495')!)
-      return 'C-';
-    else if (gpaValue >= dp('1.155')!)
-      return 'D+';
-    else if (gpaValue >= dp('0.825')!)
-      return 'D';
-    else if (gpaValue >= dp('0.495')!)
-      return 'D-';
-    else
-      return 'F';
-  }
 }
